@@ -1,0 +1,16 @@
+{
+  "name": "vita-revamp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^6.4.1",
+    "prisma-client-lib": "^1.34.0"
+  }
+}

@@ -1,0 +1,50 @@
+type User {
+  id: ID! @id
+  name: String! @unique
+}
+
+type Group {
+  id: ID! @id
+  name: String! @unique
+  users: [User!]!
+}
+
+type PermissionSet {
+  id: ID! @id
+  read: Boolean! @default(value: false)
+  write: Boolean! @default(value: false)
+  execute: Boolean! @default(value: false)
+}
+
+type Permission {
+  id: ID! @id
+  user: PermissionSet! @relation(link: TABLE, name: "PermissionToUser")
+  group: PermissionSet! @relation(link: TABLE, name: "PermissionToGroup")
+  other: PermissionSet! @relation(link: TABLE, name: "PermissionToOther")
+}
+
+enum NodeType {
+  FILE,
+  DIRECTORY
+}
+
+type Data {
+  id: ID! @id
+  data: String!
+}
+
+type Inode {
+  id: ID! @id 
+  name: String!
+  metadata: Metadata! 
+}
+
+type Metadata {
+  id: ID! @id
+  owner: User! @relation(link: TABLE, name: "MetadataToUser")
+  group: Group! @relation(link: TABLE, name: "MetadataToGroup")
+  permissions: Permission!
+  type: NodeType!
+  data: [Data!]!
+  parent: String
+}
